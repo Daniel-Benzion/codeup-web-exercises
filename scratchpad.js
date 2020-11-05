@@ -76,7 +76,7 @@ function totalPay(arr) {
     }
     return total;
 }
-console.log(totalPay([["Facebook", 10], ["Google", 6], ["Amazon", 4]]))
+console.log(totalPay([["Facebook", 10], ["Google", 6], ["Amazon", 4]])) //Prints 7420
 
 
 
