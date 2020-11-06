@@ -56,10 +56,12 @@ var random = Math.floor((Math.random() * 3) + 1);
  * number)
  */
 
-function isTwo(num) {
-    return (num === 2);
+function isTwo(x) {
+    return (x === 2);
 }
 
+
+console.log(random);
 console.log(isTwo(random));
 
 /**
@@ -79,6 +81,8 @@ function calculateTip(percentage, total) {
     return result.toFixed(2);
 }
 
+console.log(calculateTip(0.15, 25));
+
 /**
  * TODO:
  * Use prompt and alert in combination with your calculateTip function to
@@ -90,6 +94,7 @@ var percentagePrompt = prompt("Please enter the percentage you would like to tip
 var totalPrompt = prompt("Please enter the total amount of your bill, with no dollar sign, e.g.: 10.25")
 
 alert("Here is your tip amount: $" + calculateTip(percentagePrompt, totalPrompt));
+
 
 
 /**
@@ -107,7 +112,11 @@ alert("Here is your tip amount: $" + calculateTip(percentagePrompt, totalPrompt)
  * > applyDiscount(45.99, 0.12) // 40.4712
  */
 
-function applyDiscount(price, discountPercent) {
-    var discount = price * discountPercent;
-    return price - discount;
+
+function applyDiscount(originalPrice, discountPercentage) {
+    var discount = originalPrice * discountPercentage;
+    var result = originalPrice - discount;
+    return result.toFixed(2);
 }
+
+console.log(applyDiscount(10.00, 0.15));
