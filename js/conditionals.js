@@ -74,28 +74,28 @@ console.log(analyzeColor1(randomColor));
 function analyzeColor(color) {
     switch(color) {
         case "red":
-            return "Red is the color of the revolution";
+            return "Red is the color of the revolution.";
             break;
         case "orange":
-            return "Orange is the color of the fruit of the same name";
+            return "Orange is the color of the fruit of the same name.";
             break;
         case "yellow":
-            return "Yellow is the color of the sun";
+            return "Yellow is the color of the sun.";
             break;
         case "green":
-            return "Green is the color of grass";
+            return "Green is the color of grass.";
             break;
         case "blue":
-            return "Blue is the color of the sky";
+            return "Blue is the color of the sky.";
             break;
         case "indigo":
-            return "Indigo is an underappreciated color, very beautiful and prized for its use as a dye";
+            return "Indigo is an underappreciated color, very beautiful and prized for its use as a dye.";
             break;
         case "violet":
-            return "Violet is the color of royalty";
+            return "Violet is the color of royalty.";
             break;
         default:
-            return "I don't know anything about " + color;
+            return "I don't know anything about " + color + ".";
             break;
     }
 }
@@ -191,7 +191,7 @@ var luckyNumber = Math.floor(Math.random() * 6);
 
 var billPrompt = prompt("What is your total bill amount?");
 
-alert("Your lucky number was: " + luckyNumber + "\n" + "Your price before discount was: " + billPrompt + "\n" + "Your price after discount is: " + calculateTotal(luckyNumber, billPrompt));
+alert("Your lucky number was: " + luckyNumber + "\n" + "Your price before discount was: " + parseFloat(billPrompt).toFixed(2) + "\n" + "Your price after discount is: " + parseFloat(calculateTotal(luckyNumber, billPrompt)).toFixed(2));
 
 
 
@@ -214,44 +214,38 @@ alert("Your lucky number was: " + luckyNumber + "\n" + "Your price before discou
  * HINT: The way we prompt for a value could be improved
  */
 
+var numConfirm = confirm("Would you like to enter a number?");
 
-function numberStuff() {
+if (numConfirm) {
 
-    var numConfirm = confirm("Would you like to enter a number?");
+    var numPrompt = prompt("Please enter your number");
 
-    if (numConfirm) {
+    if (!isNaN(numPrompt)) {
 
-        var numPrompt = prompt("Please enter your number");
-
-        if (!isNaN(numPrompt)) {
-            var isEven = function (x) {
-                if (x % 2 === 0) {
-                    return "even.";
-                } else {
-                    return "odd.";
-                }
+        var isEven = function (x) {
+            if (x % 2 === 0) {
+                return "even.";
+            } else {
+                return "odd.";
             }
-
-            var isPositive = function (x) {
-                if (x > 0) {
-                    return "positive.";
-                } else if (x < 0) {
-                    return "negative.";
-                } else {
-                    return "zero, and therefore neither positive nor negative."
-                }
-            }
-
-            alert("Your number is " + isEven(numPrompt));
-
-            alert("Your number plus 100 is " + (parseInt(numPrompt) + 100) + ".");
-
-            alert("Your number is " + isPositive(numPrompt));
-        } else {
-            alert("Sorry, that is not a number.");
         }
+
+        var isPositive = function (x) {
+            if (x > 0) {
+                return "positive.";
+            } else if (x < 0) {
+                return "negative.";
+            } else {
+                return "zero, and therefore neither positive nor negative."
+            }
+        }
+
+        alert("Your number is " + isEven(numPrompt));
+
+        alert("Your number plus 100 is " + (parseFloat(numPrompt) + 100) + ".");
+
+        alert("Your number is " + isPositive(numPrompt));
+    } else {
+        alert("Sorry, that is not a number.");
     }
 }
-
-numberStuff();
-
