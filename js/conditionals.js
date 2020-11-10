@@ -191,7 +191,7 @@ var luckyNumber = Math.floor(Math.random() * 6);
 
 var billPrompt = prompt("What is your total bill amount?");
 
-alert("Your lucky number was: " + luckyNumber + "\n" + "Your price before discount was: " + parseFloat(billPrompt).toFixed(2) + "\n" + "Your price after discount is: " + parseFloat(calculateTotal(luckyNumber, billPrompt)).toFixed(2));
+alert("Your lucky number was: " + luckyNumber + "\n" + "Your price before discount was: $" + parseFloat(billPrompt).toFixed(2) + "\n" + "Your price after discount is: $" + parseFloat(calculateTotal(luckyNumber, billPrompt)).toFixed(2));
 
 
 
