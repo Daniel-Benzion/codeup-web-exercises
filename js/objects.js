@@ -66,9 +66,9 @@
 
      var discount = function(shoppers) {
          if (shoppers.amount < 200) {
-             console.log("Shopper: " + shoppers.name + "; " + "Amount before discount: " + shoppers.amount + "; " + "Discount: $0" + "; " + "Amount after discount: " + shoppers.amount + ".");
+             console.log("Shopper: " + shoppers.name + "; Amount before discount: " + shoppers.amount + "; Discount: $0" + "; Amount after discount: " + shoppers.amount + ".");
          } else {
-             console.log("Shopper: " + shoppers.name + "; " + "Amount before discount: " + shoppers.amount + "; " + "Discount: " + ((shoppers.amount * 0.12).toFixed(2)) + "; " + "Amount after discount: " + ((shoppers.amount - (shoppers.amount * 0.12)).toFixed(2)) + ".");
+             console.log("Shopper: " + shoppers.name + "; Amount before discount: " + shoppers.amount + "; Discount: " + ((shoppers.amount * 0.12).toFixed(2)) + "; Amount after discount: " + ((shoppers.amount - (shoppers.amount * 0.12)).toFixed(2)) + ".");
          }
      }
 
