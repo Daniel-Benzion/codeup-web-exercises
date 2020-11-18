@@ -27,22 +27,12 @@
      * > console.log(person.sayHello()) // "Hello from Rick Sanchez!"
      */
 
-    /* person.sayHello = function() {
-        return "Hello, " + person.firstName + " " + person.lastName + "!";
+    person.sayHello = function() {
+        return "Hello, " + this.firstName + " " + this.lastName + "!";
     }
 
     console.log(person.sayHello());
-*/
 
-    var person1 = {firstName: "Dan", lastName: "Benzion"};
-    var person2 = {firstName: "Haywood", lastName: "Jablowmie"};
-
-    function sayHello(person) {
-        return "Hello, " + person.firstName + " " + person.lastName;
-    }
-
-    console.log(sayHello(person1));
-    console.log(sayHello(person2));
 
     /** TODO:
      * HEB has an offer for the shoppers that buy products amounting to
@@ -64,11 +54,11 @@
          {name: 'George', amount: 320}
      ];
 
-     var discount = function(shoppers) {
-         if (shoppers.amount < 200) {
-             console.log("Shopper: " + shoppers.name + "; Amount before discount: " + shoppers.amount + "; Discount: $0" + "; Amount after discount: " + shoppers.amount + ".");
+     var discount = function(shopper) {
+         if (shopper.amount < 200) {
+             console.log("Shopper: " + shopper.name + "; Amount before discount: $" + (shopper.amount).toFixed(2) + "; Discount: $0.00" + "; Amount after discount: $" + (shopper.amount).toFixed(2) + ".");
          } else {
-             console.log("Shopper: " + shoppers.name + "; Amount before discount: " + shoppers.amount + "; Discount: " + ((shoppers.amount * 0.12).toFixed(2)) + "; Amount after discount: " + ((shoppers.amount - (shoppers.amount * 0.12)).toFixed(2)) + ".");
+             console.log("Shopper: " + shopper.name + "; Amount before discount: $" + (shopper.amount).toFixed(2) + "; Discount: $" + ((shopper.amount * 0.12).toFixed(2)) + "; Amount after discount: $" + ((shopper.amount - (shopper.amount * 0.12)).toFixed(2)) + ".");
          }
      }
 
@@ -89,11 +79,41 @@
      */
 
     var books = [
-        {title: "Harry Potter", author: {firstName: "J.K.", lastName: "Rowling"}},
-        {title: "Foundation", author: {firstName: "Isaac", lastName: "Asimov"}},
-        {title: "Casino Royale", author: {firstName: "Ian", lastName: "Fleming"}},
-        {title: "Starship Troopers", author: {firstName: "Robert", lastName: "Heinlein"}},
-        {title: "Mort", author: {firstName: "Terry", lastName: "Pratchett"}}
+        {
+            title: "Harry Potter",
+            author: {
+                firstName: "J.K.",
+                lastName: "Rowling"
+            }
+        },
+        {
+            title: "Foundation",
+            author: {
+                firstName: "Isaac",
+                lastName: "Asimov"
+            }
+        },
+        {
+            title: "Casino Royale",
+            author: {
+                firstName: "Ian",
+                lastName: "Fleming"
+            }
+        },
+        {
+            title: "Starship Troopers",
+            author: {
+                firstName: "Robert",
+                lastName: "Heinlein"
+            }
+        },
+        {
+            title: "Mort",
+            author: {
+                firstName: "Terry",
+                lastName: "Pratchett"
+            }
+        }
     ]
 
     /**
@@ -170,5 +190,13 @@ var createBook = function(title, author) {
 
     console.log(books2);
 
+    function showBookInfo(book) {
+        var str = "Title: " + book.title + "\n" + "Author: " + book.author.firstName + " " + book.author.lastName;
+        return str;
+    }
+
+    books.forEach(function(book, index){
+        console.log("Book # " + (index + 1) + "\n" + showBookInfo(book))
+    })
 
 })();
