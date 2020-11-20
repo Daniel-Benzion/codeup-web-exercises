@@ -1,3 +1,10 @@
+body {
+    font-family: "Lucida Grande", monospace;
+    background-image: url("https://images.pexels.com/photos/3000260/pexels-photo-3000260.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
 img {
     height: 400px;
     width: 400px;
@@ -5,8 +12,37 @@ img {
 
 table, th, td {
     border: 1px solid black;
+    padding: 10px;
+    font-size: 20px;
+}
+
+h2, h3 {
+    color: cornflowerblue;
+    text-decoration: underline;
 }
 
 .fancy-header {
+    text-align: center;
+    color: cornflowerblue;
+    text-decoration: underline;
+}
+
+
+a:link {
+    color: blue;
+}
+
+
+a:visited {
     color: rebeccapurple;
+}
+
+
+a:hover {
+    color: springgreen;
+}
+
+
+a:active {
+    color: crimson;
 }
