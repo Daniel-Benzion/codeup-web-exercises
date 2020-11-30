@@ -116,3 +116,26 @@ var ws = function(x) {
 var usernameWhitespace = ws(username); //Does the username start || end with whitespace?
 var passwordWhitespace = ws(password); //Does the password start || end with whitespace?
 
+
+function countVowels(n) {
+    var vowels = /[aeiou]/i;
+    var counter = 0;
+    var arr = n.split("");
+    for (var i = 0; i < arr.length; i++) {
+        if (vowels.test(arr[i])) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function countVowels(n) {
+    var counter = 0;
+    var arr = n.split("");
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === "a" || arr[i] === "A" || arr[i] === "e" || arr[i] === "E" || arr[i] === "i" || arr[i] === "I" || arr[i] === "O" || arr[i] === "o" || arr[i] === "u" || arr[i] === "U") {
+            counter++;
+        }
+    }
+    return counter;
+}
