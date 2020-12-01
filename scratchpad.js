@@ -139,3 +139,27 @@ function countVowels(n) {
     }
     return counter;
 }
+
+function names(str) {
+    var str2 = str.toUpperCase();
+    console.log(str2);
+
+    var arr = str2.split(";");
+    console.log(arr);
+
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i].length; j++) {
+            if (arr[i][j] === ":") {
+                arr[i].splice()
+            }
+        }
+    }
+
+
+
+    var arrFinal;
+
+    var strFinal = arrFinal.join(")(");
+
+    return "(" + strFinal + ")";
+}
