@@ -1,0 +1,27 @@
+
+
+.jumbotron{
+    background-color: #b0d2fa;
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2{
+    margin-bottom: .5em;
+    color: #007BFF;
+}
+
+
+@media screen and (min-width: 768px){
+    .navbar-nav{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
