@@ -163,3 +163,12 @@ function names(str) {
 
     return "(" + strFinal + ")";
 }
+
+function replace(str, strOld, strNew) {
+    if (typeof str !== "string") {
+        return false;
+    } else {
+        var strFinal = str.replace(strOld, strNew);
+    }
+    return strFinal;
+}
