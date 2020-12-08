@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <title>DOM: Query and Modify</title>
 </head>
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        margin: 5px;
+    }
+</style>
 <body>
 
 <h1 id="main-header">Hello World!</h1>
@@ -24,12 +34,27 @@
     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
-<button id="main-change">Change the Main Header</button>
-<button id="sub-change">Change the Sub-Header</button>
-<button id="every-other">Change Every Other List Item</button>
-<button id="first-list">Change the First List Item</button>
-<button id="sub-paragraph-change">Change the Sub-Paragraph</button>
-
+<div>
+    <button id="main-change">Change the Main Header</button>
+    <button id="sub-change">Change the Sub-Header</button>
+    <button id="every-other">Change Every Other List Item</button>
+    <button id="first-list">Change the First List Item</button>
+    <button id="sub-paragraph-change">Change the Sub-Paragraph</button>
+</div>
+<br>
+<br>
+<div style="margin: auto">
+    <button id="main-reset">Reset the Main Header</button>
+    <button id="sub-reset">Reset the Sub-Header</button>
+    <button id="every-other-reset">Reset Every Other List Item</button>
+    <button id="first-list-reset">Reset the First List Item</button>
+    <button id="sub-paragraph-reset">Reset the Sub-Paragraph</button>
+</div>
+<br>
+<br>
+<div style="margin: auto">
+    <button id="reset-all">Reset Entire Page</button>
+</div>
 <script>
 
     "use strict";
@@ -40,9 +65,14 @@
         mainHeader.innerHTML = "JavaScript is Cool";
         }
 
+    var mainReset = document.getElementById("main-reset");
+    var mainResetListener = function(event) {
+        mainHeader.innerHTML = "Hello World!";
+    }
+
     // TODO: Set inner html of mainHeader to "JavaScript is Cool"
     mainChange.addEventListener('click', mainListener);
-
+    mainReset.addEventListener('click', mainResetListener);
 
 
 
@@ -54,10 +84,15 @@
     var subListener = function(event) {
         subHeader.style.color = "blue";
     }
+
+    var subReset = document.getElementById("sub-reset");
+    var subResetListener = function(event) {
+        subHeader.style.color = "black";
+    }
     // TODO: Set the text color of subHeader to blue
 
     subChange.addEventListener('click', subListener);
-
+    subReset.addEventListener('click', subResetListener);
 
 
 
@@ -71,10 +106,19 @@
             }
         }
     }
+
+    var everyOtherReset = document.getElementById("every-other-reset");
+    var everyOtherResetListener = function(event) {
+        for (var i = 0; i < listItems.length; i++) {
+            if (parseInt(listItems[i].getAttribute("data-dbid")) % 2 !== 0) {
+                listItems[i].style.color = "black";
+            }
+        }
+    }
     // TODO: Set text color on every other list item to grey
 
     everyOther.addEventListener('click', everyOtherListener);
-
+    everyOtherReset.addEventListener('click', everyOtherResetListener);
 
 
 
@@ -87,8 +131,13 @@
         listItems[0].style.color = "blue";
     }
 
-    firstList.addEventListener('click', firstListListener);
+    var firstListReset = document.getElementById("first-list-reset");
+    var firstListResetListener = function(event) {
+        listItems[0].style.color = "black";
+    }
 
+    firstList.addEventListener('click', firstListListener);
+    firstListReset.addEventListener('click', firstListResetListener);
 
 
 
@@ -101,10 +150,27 @@
         subParagraphs[0].innerText = "Mission Accomplished!";
     }
 
+    var subParagraphReset = document.getElementById("sub-paragraph-reset");
+    var subParagraphResetListener = function(event) {
+        subParagraphs[0].innerText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    }
 
     // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
 
     subParagraphChange.addEventListener('click', subParagraphListener);
+    subParagraphReset.addEventListener('click', subParagraphResetListener);
+
+
+    var resetAll = document.getElementById("reset-all");
+    var resetAllListener = function(event) {
+        mainResetListener();
+        subResetListener();
+        everyOtherResetListener();
+        firstListResetListener();
+        subParagraphResetListener();
+    }
+
+    resetAll.addEventListener('click', resetAllListener);
 
 </script>
 </body>
