@@ -24,40 +24,88 @@
     pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
 </p>
+<button id="main-change">Change the Main Header</button>
+<button id="sub-change">Change the Sub-Header</button>
+<button id="every-other">Change Every Other List Item</button>
+<button id="first-list">Change the First List Item</button>
+<button id="sub-paragraph-change">Change the Sub-Paragraph</button>
 
 <script>
-    (function() {
-        "use strict";
-        // TODO: Uncomment next line and get the main header element by id
-         var mainHeader = document.getElementById("main-header");
 
-        // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+    "use strict";
+    // TODO: Uncomment next line and get the main header element by id
+    var mainHeader = document.getElementById("main-header");
+    var mainChange = document.getElementById("main-change");
+    var mainListener = function(event) {
         mainHeader.innerHTML = "JavaScript is Cool";
-        // TODO: Uncomment the next line and get the sub header element by id
-         var subHeader = document.getElementById("sub-header");
+        }
 
-        // TODO: Set the text color of subHeader to blue
+    // TODO: Set inner html of mainHeader to "JavaScript is Cool"
+    mainChange.addEventListener('click', mainListener);
+
+
+
+
+
+
+    // TODO: Uncomment the next line and get the sub header element by id
+    var subHeader = document.getElementById("sub-header");
+    var subChange = document.getElementById("sub-change");
+    var subListener = function(event) {
         subHeader.style.color = "blue";
-        // TODO: Uncomment the next line and get all list items
-         var listItems = document.getElementsByTagName("li");
+    }
+    // TODO: Set the text color of subHeader to blue
 
-        // TODO: Set text color on every other list item to grey
-        // TODO: Set text color of li with dbid = 1 to blue
+    subChange.addEventListener('click', subListener);
+
+
+
+
+    // TODO: Uncomment the next line and get all list items
+    var listItems = document.getElementsByTagName("li");
+    var everyOther = document.getElementById("every-other");
+    var everyOtherListener = function(event) {
         for (var i = 0; i < listItems.length; i++) {
             if (parseInt(listItems[i].getAttribute("data-dbid")) % 2 !== 0) {
                 listItems[i].style.color = "gray";
             }
-            if (parseInt(listItems[i].getAttribute("data-dbid")) === 1) {
-                listItems[i].style.color = "blue";
-            }
         }
+    }
+    // TODO: Set text color on every other list item to grey
 
-        // TODO: Uncomment the next line and get all elements with class name sub-paragraph
-        var subParagraphs = document.getElementsByClassName("sub-paragraph");
+    everyOther.addEventListener('click', everyOtherListener);
 
-        // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+
+
+
+
+
+
+    // TODO: Set text color of li with dbid = 1 to blue
+    var firstList = document.getElementById("first-list");
+    var firstListListener = function(event) {
+        listItems[0].style.color = "blue";
+    }
+
+    firstList.addEventListener('click', firstListListener);
+
+
+
+
+
+
+    // TODO: Uncomment the next line and get all elements with class name sub-paragraph
+    var subParagraphs = document.getElementsByClassName("sub-paragraph");
+    var subParagraphChange = document.getElementById("sub-paragraph-change");
+    var subParagraphListener = function(event) {
         subParagraphs[0].innerText = "Mission Accomplished!";
-    })();
+    }
+
+
+    // TODO: Change the text in the first sub paragraph to "Mission Accomplished!"
+
+    subParagraphChange.addEventListener('click', subParagraphListener);
+
 </script>
 </body>
 </html>
