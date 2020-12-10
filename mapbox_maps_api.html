@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurants Map</title>
+    <!-- Mapbox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- Custom CSS -->
+    <link 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 	rel="stylesheet" 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 	crossorigin="anonymous">
+    <style>
+        #map {
+            /* the width and height may be set to any size */
+            width: 100%;
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Restaurants Map</h1>
+</div>
+
+<!-- The HTML element that serves as the Mapbox container -->
+<div id='map'></div>
+
+<!-- Mapbox JS -->
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+<script src="js/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
+<script>
+    mapboxgl.accessToken = mapboxToken;
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [-79.09053343118406, 35.83595842836113],
+        zoom: 11,
+
+    });
+
+    var markerOptions = {
+        color: "rebeccapurple",
+
+    };
+
+    var restaurants = [
+        {
+            name: 'Taco Bell',
+            food: 'Tacos'
+        },
+        {
+            name: 'Guglhupf',
+            food: 'Pastries'
+        },
+        {
+            name: 'Root Cellar',
+            food: 'Family-style'
+        },
+    ];
+
+    restaurants.forEach(function(restaurant, index) {
+        console.log('Name: ' + (restaurant.name));
+        console.log('Food: ' + restaurant.food);
+
+    });
+
+
+    var tacoMarker = new mapboxgl.Marker(markerOptions)
+        .setLngLat([-79.09053343118406, 35.83595842836113])
+        .addTo(map);
+
+
+    var guMarker = new mapboxgl.Marker(markerOptions)
+        .setLngLat([-78.93231710234527, 35.974530028392834])
+        .addTo(map);
+
+    var rootCellarMarker = new mapboxgl.Marker(markerOptions)
+        .setLngLat([-79.05594598319595, 35.9294916732116])
+        .addTo(map);
+
+
+
+    map.on('click', function () {
+        var favoriteRestaurant = new mapboxgl.Popup()
+            .setHTML("<h3>Taco Bell</h3>")
+            .addTo(map);
+
+        tacoMarker.setPopup(favoriteRestaurant);
+    });
+
+
+    map.on('click', function () {
+        var secondRestaurant = new mapboxgl.Popup()
+            .setHTML("<h3>Guglhupf</h3>")
+            .addTo(map);
+
+        guMarker.setPopup(secondRestaurant);
+    });
+
+    map.on('click', function () {
+        var rootCellarRestaurant = new mapboxgl.Popup()
+            .setHTML("<h3>Root Cellar</h3>")
+            .addTo(map);
+
+        rootCellarMarker.setPopup(rootCellarRestaurant);
+    });
+
+
+</script>
+
+<!-- Custom JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+</body>
+</html>
