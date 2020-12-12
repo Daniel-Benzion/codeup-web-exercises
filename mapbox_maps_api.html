@@ -23,16 +23,23 @@
 
 <!-- The HTML element that serves as the Mapbox container -->
 <div id='map'></div>
+<button id="taco">Favorite Restaurant</button>
+<button id="gu">This restaurant is good too</button>
+<button id="root-cellar">Also this one</button>
 
 <!-- Mapbox JS -->
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="js/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
 <script>
+    var tacoButton = document.getElementById("taco");
+    var guButton = document.getElementById("gu");
+    var rootCellarButton = document.getElementById("root-cellar");
+
     mapboxgl.accessToken = mapboxToken;
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/dark-v10',
         center: [-79.09053343118406, 35.83595842836113],
         zoom: 11,
 
@@ -58,7 +65,7 @@
         },
     ];
 
-    restaurants.forEach(function(restaurant, index) {
+    restaurants.forEach(function(restaurant) {
         console.log('Name: ' + (restaurant.name));
         console.log('Food: ' + restaurant.food);
 
@@ -80,7 +87,7 @@
 
 
 
-    map.on('click', function () {
+    tacoButton.addEventListener('click', function () {
         var favoriteRestaurant = new mapboxgl.Popup()
             .setHTML("<h3>Taco Bell</h3>")
             .addTo(map);
@@ -89,7 +96,7 @@
     });
 
 
-    map.on('click', function () {
+    guButton.addEventListener('click', function () {
         var secondRestaurant = new mapboxgl.Popup()
             .setHTML("<h3>Guglhupf</h3>")
             .addTo(map);
@@ -97,7 +104,7 @@
         guMarker.setPopup(secondRestaurant);
     });
 
-    map.on('click', function () {
+    rootCellarButton.addEventListener('click', function () {
         var rootCellarRestaurant = new mapboxgl.Popup()
             .setHTML("<h3>Root Cellar</h3>")
             .addTo(map);
