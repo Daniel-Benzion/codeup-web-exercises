@@ -14,12 +14,4 @@ $(document).ready(function () {
 
     $('h1,p,li').css('background-color', 'grey');
 
-    //$('#container').css('color','white');
-
-    //$('#container').css('background-color', 'black');
-
-    //$('#container').css( {
-       // 'color': 'white',
-       // 'background-color': 'black'
-   // });
 });
