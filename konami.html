@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konami Code</title>
+</head>
+<body>
+<h1>Konami Code!</h1>
+<h2>Konami Code, but it's orange!</h2>
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+    "use strict";
+
+    let keyBuffer = [];
+    let kCheck = false;
+
+    $(document).keyup(function(event){
+        console.log(event.keyCode);
+        var kode = [38,38,40,40,37,39,37,39,66,65,13];
+
+        //every key pressed will go into the buffer
+        keyBuffer.push(event.keyCode);
+
+        //we check the buffer each press to see if it matches the code so far, otherwise clear it
+        keyBuffer.forEach((key, index) => {
+            if (kode[index] !== key) {
+                keyBuffer = [];
+            }
+        })
+
+        //if the keybuffer is the same length as the kode array, we must have gotten the code right
+        if (keyBuffer.length === kode.length && !kCheck) {
+            console.log("YEET");
+
+            alert("You have added 30 lives!");
+            $('body').css('background', '#000000');
+            $('h1').css('color', '#ffffff');
+            $('h2').css('color', '#ff5100');
+            keyBuffer = [];
+            kCheck = true
+        } else if (keyBuffer.length === kode.length && kCheck) {
+            console.log("AWWW YEEEEAAAHHH");
+
+            alert("Extra lives removed");
+            $('body').css('background', '#ffffff');
+            $('h1').css('color', '#000000');
+            $('h2').css('color', '#000000');
+            keyBuffer = [];
+            kCheck = false;
+        } else if (keyBuffer.length > kode.length) {
+            keyBuffer = [];
+        }
+    });
+</script>
+</body>
+</html>
