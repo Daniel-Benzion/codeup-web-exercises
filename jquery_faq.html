@@ -12,6 +12,18 @@
             background: darkorange;
         }
 
+        .yellow {
+            background: yellow;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .blue {
+            color: blue;
+        }
+
     </style>
 </head>
 <body>
@@ -51,11 +63,39 @@
 
 <button id="toggle-invisible">Reveal FAQ answers!</button>
 
+<h3>Grand Canyon</h3>
+<ul>
+    <li>The Grand Canyon creates its own weather</li>
+    <li>The are no dinosaur bones in the Grand Canyon</li>
+    <li>Fish are uncommon in the Grand Canyon</li>
+    <li>There is a town in the Grand Canyon</li>
+</ul>
+
+<h3>Denali</h3>
+<ul>
+    <li>Denali National Park is larger than the state of New Jersey</li>
+    <li>Denali is the highest mountain peak in North America- 20,320 feet high</li>
+    <li>The wood frogs of Denali freeze themselves into a cryogenic state in wintertime. Their heart stops beating and lungs cease pumping until the frog thaws in the spring.</li>
+    <li>Denali (the mountain) is visible from 200 miles away</li>
+</ul>
+
+<h3>Yosemite</h3>
+<ul>
+    <li>Yosemite National Park is home to over 400 animal species</li>
+    <li>At 2,425 feet, Yosemite Falls is one of tallest on the planet</li>
+    <li>Yosemite is the only national park to bid to host the winter Olympics</li>
+    <li>Giant Sequoias which grow in Yosemite National Park are the biggest living things on the planet. However, the seed for the Giant Sequoia is only the size of a piece of oatmeal.</li>
+</ul>
+
+<button id="make-yellow">Make the last fact in each list yellow!</button>
+
 <script src="js/jquery-2.2.4.js"></script>
 <script>
     "use strict";
 
     let dds = document.getElementsByTagName('dd');
+    let makeYellow = document.getElementById('make-yellow');
+    let ul = document.getElementsByTagName('ul');
 
     $(document).ready(function() {
 
@@ -72,6 +112,21 @@
         $('dt').click(function(){
             $(this).toggleClass('highlighted');
         });
+
+        $(makeYellow).click(function(event) {
+           event.preventDefault();
+           $(ul).each(function() {
+               $(this).children().last().toggleClass('yellow');
+           });
+        });
+
+        $('h3').click(function() {
+            $(this).next().children().toggleClass('bold');
+        });
+
+        $('li').click(function() {
+            $(this).parent().children().first().toggleClass('blue');
+        })
     });
 </script>
 </body>
