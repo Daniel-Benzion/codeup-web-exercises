@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+<div id="posts"></div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script>
+    (function() {
+        "use strict";
+
+        let posts = document.getElementById("posts");
+        let blog = "data/blog.json";
+
+        let showPosts = function() {
+            $.get(blog).done(function (entries) {
+                $.each(entries, function (i, post) {
+                    $(posts).append("<h3>" + post.title + "</h3><div>" + post.content + "</div><div>Tags: " + post.categories + "</div>");
+                });
+            });
+        }
+
+        showPosts();
+    })();
+</script>
+
+</body>
+</html>
