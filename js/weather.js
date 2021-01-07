@@ -126,13 +126,31 @@ function getLocation(search) {
             essential: true
         })
     })
-
-
+    getWeather(search);
 }
+
 $('#citySearch').click(function(e){
     e.preventDefault();
     getLocation($('#cityName').val());
 })
+
+function getWeather(city) {
+
+    let weatherOptions = {
+        "APPID": weatherKey,
+        "q":`${city?city:'Chapel Hill'}`,
+        "lat": `${lngLat.lat}`,
+        "lon":`${lngLat.lng}`,
+        "units": "imperial"
+    }
+
+    $.get("http://api.openweathermap.org/data/2.5/forecast", weatherOptions).done(function (data) {
+        createCard(data);
+    })
+
+}
+
+getWeather("Chapel Hill");
 
 
 
