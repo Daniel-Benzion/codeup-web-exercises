@@ -1,3 +1,4 @@
+
 "use strict"
 
 mapboxgl.accessToken = mapboxToken;
@@ -94,5 +95,44 @@ function createCard(data){
         }
     })
 }
+
+
+function getLocation(search) {
+
+    let weatherOptions = {
+        "APPID": weatherKey,
+        "q": `${search ? search : 'Chapel Hill'}`,
+        "lat": `${lngLat.lat}`,
+        "lon": `${lngLat.lng}`,
+        "units": "imperial"
+    }
+
+
+    $.get("http://api.openweathermap.org/data/2.5/forecast", weatherOptions).done(function (data) {
+        let coords = {
+            lon: data.city.coord.lon,
+            lat: data.city.coord.lat
+        }
+        marker = new mapboxgl.Marker({
+            draggable: true
+        })
+            .setLngLat([coords.lon, coords.lat])
+            .addTo(map);
+        map.flyTo({
+            center: [
+                coords.lon,
+                coords.lat
+            ],
+            essential: true
+        })
+    })
+
+
+}
+$('#citySearch').click(function(e){
+    e.preventDefault();
+    getLocation($('#cityName').val());
+})
+
 
 
