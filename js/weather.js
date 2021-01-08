@@ -65,6 +65,8 @@ function createCard(data){
 
         if (i % 8 === 0) {
 
+            console.log(day);
+
             let card = document.createElement("div");
             card.setAttribute("class","flex-column card m-2 p-0");
             card.setAttribute("style","min-width:12em;background:rgba(47, 53, 71,0.9); color:white");
@@ -88,7 +90,7 @@ function createCard(data){
             let temp = document.createElement("div");
             temp.setAttribute("class","temp");
             temp.setAttribute("class","pb-4");
-            temp.innerHTML = day.main.temp_max + "&deg F / " + day.main.temp_min + "&deg F";
+            temp.innerHTML = "Temperature: " + (day.main.temp).toFixed(1) + "&deg F" + "<br>" + "Feels like: " + (day.main.feels_like).toFixed(1) + "&deg F";
 
             let icon = document.createElement("img");
             icon.src = "http://openweathermap.org/img/w/" + day.weather[0].icon + ".png";
