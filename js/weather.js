@@ -28,11 +28,11 @@ function onDragEnd() {
     let lng = lngLat.lng;
     let lat = lngLat.lat
 
-    updateWeather(lat,lng)
+    specialWeather(lat,lng)
     reverseGeocode(lngLat,mapBoxWeather).then(result=>{
-        let address = result.split(',')
+        let location = result.split(',')
         const city = document.getElementById('city')
-        city.innerText = "Weather for " + address[1];
+        city.innerText = "Weather for " + location[1];
     })
 
     map.flyTo({
@@ -44,7 +44,7 @@ function onDragEnd() {
     })
 }
 
-function updateWeather(lat,lon){
+function specialWeather(lat,lon){
     $.get("http://api.openweathermap.org/data/2.5/forecast", {
         APPID: weatherKey,
         lat: lat,
@@ -74,14 +74,14 @@ function createCard(data){
             hr.push(document.createElement("hr"));
             hr.push(document.createElement("hr"));
 
-            //starts header
+
             let header = document.createElement("div");
             header.setAttribute("class","card-header text-center font-weight-bold");
             let date = new Date();
             date.setTime(day.dt * 1000);
             header.innerHTML = date.toLocaleDateString();
 
-            //starts body
+
             let body = document.createElement("div");
             body.setAttribute("class","card-body text-center");
 
@@ -119,7 +119,7 @@ function createCard(data){
             body.appendChild(hr[2]);
             body.appendChild(pressure);
 
-            //add to document
+
             card.appendChild(header);
             card.appendChild(body);
 
@@ -221,22 +221,20 @@ let dMode = 0;
 
 function konami(e) {
 
-    //console.log(e);
-    //The konami code
+
     var kode = [38,38,40,40,37,39,37,39,66,65,13];
 
-    //every key pressed will go into the buffer
+
     keyBuffer.push(e.keyCode);
 
-    //we check the buffer each press to see if it matches
-    //the code so far, if not clear it
+
     keyBuffer.forEach((key, index) => {
         if (kode[index] !== key) {
             keyBuffer = [];
         }
     })
 
-    //if the keybuffer is the same length, we must have gotten the code right
+
     if (keyBuffer.length === kode.length && !dMode) {
         console.log("YEET");
         //fires off dark mode
