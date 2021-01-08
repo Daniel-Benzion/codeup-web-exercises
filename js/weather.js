@@ -194,6 +194,9 @@ bodyMain.style.backgroundImage = "url(img/assets/images/clear-blue-sky.jpeg)";
 
 bodyMain.style.backgroundSize = "cover";
 
+let keyBuffer = [];
+let dMode = 0;
+
 function themeBasedOnTime(){
     const date = new Date();
     const hour = date.getHours();
@@ -216,8 +219,7 @@ function lightMode() {
     bodyMain.style.backgroundSize = "cover";
 }
 
-let keyBuffer = [];
-let dMode = 0;
+
 
 function konami(e) {
 
