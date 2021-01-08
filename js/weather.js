@@ -1,6 +1,4 @@
 
-"use strict"
-
 mapboxgl.accessToken = mapboxToken;
 let map = new mapboxgl.Map({
     container: 'map',
@@ -21,8 +19,41 @@ let marker = new mapboxgl.Marker({
 
 marker.setLngLat([-79.05588851153787, 35.91385037535829]).addTo(map);
 
-//need a function to update weather when marker is dragged
+marker.on('dragend', onDragEnd);
 
+function onDragEnd() {
+    let lngLat = marker.getLngLat();
+
+    let lng = lngLat.lng;
+    let lat = lngLat.lat
+
+    updateWeather(lat,lng)
+    reverseGeocode(lngLat,mapBoxWeather).then(result=>{
+        let address = result.split(',')
+        const city = document.getElementById('city')
+        city.innerText = "Weather for " + address[1];
+    })
+
+    map.flyTo({
+        center: [
+            lng,
+            lat
+        ],
+        essential: true
+    })
+}
+
+function updateWeather(lat,lon){
+    $.get("http://api.openweathermap.org/data/2.5/forecast", {
+        APPID: weatherKey,
+        lat: lat,
+        lon: lon,
+        units: "imperial",
+        cnt: 40
+    }).done(function(data){
+        createCard(data)
+        })
+}
 
 
 function createCard(data){
@@ -63,7 +94,7 @@ function createCard(data){
 
             let description = document.createElement("div");
             description.setAttribute("class","description pb-4");
-            description.innerHTML = day.weather[0].description;
+            description.innerHTML = String(day.weather[0].description).charAt(0).toUpperCase() + String(day.weather[0].description).substring(1);
 
             let humidity = document.createElement("div");
             humidity.setAttribute("class","humidity");
@@ -99,34 +130,31 @@ function createCard(data){
 
 function getLocation(search) {
 
-    let weatherOptions = {
-        "APPID": weatherKey,
-        "q": `${search ? search : 'Chapel Hill'}`,
-        "lat": `${lngLat.lat}`,
-        "lon": `${lngLat.lng}`,
-        "units": "imperial"
-    }
-
-
-    $.get("http://api.openweathermap.org/data/2.5/forecast", weatherOptions).done(function (data) {
-        let coords = {
-            lon: data.city.coord.lon,
-            lat: data.city.coord.lat
+        let weatherOptions = {
+            "APPID": weatherKey,
+            "q": `${search ? search : 'Chapel Hill'}`,
+            "lat": `${lngLat.lat}`,
+            "lon": `${lngLat.lng}`,
+            "units": "imperial"
         }
-        marker = new mapboxgl.Marker({
-            draggable: true
+
+
+        $.get("http://api.openweathermap.org/data/2.5/forecast", weatherOptions).done(function (data) {
+            let coords = {
+                lon: data.city.coord.lon,
+                lat: data.city.coord.lat
+            }
+            marker
+                .setLngLat([coords.lon, coords.lat])
+            map.flyTo({
+                center: [
+                    coords.lon,
+                    coords.lat
+                ],
+                essential: true
+            })
         })
-            .setLngLat([coords.lon, coords.lat])
-            .addTo(map);
-        map.flyTo({
-            center: [
-                coords.lon,
-                coords.lat
-            ],
-            essential: true
-        })
-    })
-    getWeather(search);
+        getWeather(search);
 }
 
 $('#citySearch').click(function(e){
@@ -150,7 +178,7 @@ function getWeather(city) {
 
 }
 
+let defaultCity = document.getElementById("city");
+defaultCity.innerText = "Weather for Chapel Hill";
+
 getWeather("Chapel Hill");
-
-
-
