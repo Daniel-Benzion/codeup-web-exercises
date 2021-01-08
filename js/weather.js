@@ -2,9 +2,9 @@
 mapboxgl.accessToken = mapboxToken;
 let map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v9',
+    style: 'mapbox://styles/mapbox/dark-v10',
     center: [-79.05588851153787, 35.91385037535829],
-    zoom: 11,
+    zoom: 13,
 
 });
 
@@ -14,7 +14,8 @@ let lngLat = {
 };
 
 let marker = new mapboxgl.Marker({
-    draggable: true
+    draggable: true,
+    color: 'orangered'
 })
 
 marker.setLngLat([-79.05588851153787, 35.91385037535829]).addTo(map);
@@ -66,7 +67,7 @@ function createCard(data){
 
             let card = document.createElement("div");
             card.setAttribute("class","flex-column card m-2 p-0");
-            card.setAttribute("style","min-width:12em");
+            card.setAttribute("style","min-width:12em;background:rgba(47, 53, 71,0.9); color:white");
 
             let hr = [];
             hr.push(document.createElement("hr"));
@@ -87,7 +88,7 @@ function createCard(data){
             let temp = document.createElement("div");
             temp.setAttribute("class","temp");
             temp.setAttribute("class","pb-4");
-            temp.innerHTML = day.main.temp + "&degF / " + day.main.feels_like + "&degF";
+            temp.innerHTML = day.main.temp_max + "&deg F / " + day.main.temp_min + "&deg F";
 
             let icon = document.createElement("img");
             icon.src = "http://openweathermap.org/img/w/" + day.weather[0].icon + ".png";
@@ -98,15 +99,15 @@ function createCard(data){
 
             let humidity = document.createElement("div");
             humidity.setAttribute("class","humidity");
-            humidity.innerHTML = day.main.humidity;
+            humidity.innerHTML = "Humidity: " + day.main.humidity + "%";
 
             let wind = document.createElement("div");
             wind.setAttribute("class","wind");
-            wind.innerHTML = day.wind.speed + " MPH";
+            wind.innerHTML = "Wind: " + day.wind.speed + " MPH";
 
             let pressure = document.createElement("div");
             pressure.setAttribute("class","pressure");
-            pressure.innerHTML =  day.main.pressure;
+            pressure.innerHTML =  "Pressure: " + String(day.main.pressure * 0.0295301).substring(0, 5) + " inches";
 
             body.appendChild(temp);
             body.appendChild(icon);
@@ -129,6 +130,9 @@ function createCard(data){
 
 
 function getLocation(search) {
+
+    let city = document.getElementById('city')
+    city.innerText = "Weather for " + String(search).charAt(0).toUpperCase() + String(search).substring(1);
 
         let weatherOptions = {
             "APPID": weatherKey,
@@ -182,3 +186,73 @@ let defaultCity = document.getElementById("city");
 defaultCity.innerText = "Weather for Chapel Hill";
 
 getWeather("Chapel Hill");
+
+
+let bodyMain = document.getElementById('background');
+
+bodyMain.style.backgroundImage = "url(img/assets/images/clear-blue-sky.jpeg)";
+
+bodyMain.style.backgroundSize = "cover";
+
+function themeBasedOnTime(){
+    const date = new Date();
+    const hour = date.getHours();
+    if (hour < 7 || hour > 17) {
+        darkMode();
+        dMode = true;
+    }
+}
+
+themeBasedOnTime();
+
+
+function darkMode() {
+    bodyMain.style.backgroundImage = "url(img/assets/images/moon_over_clouds.jpg";
+    bodyMain.style.backgroundSize = "cover";
+}
+
+function lightMode() {
+    bodyMain.style.backgroundImage = "url(img/assets/images/clear-blue-sky.jpeg)";
+    bodyMain.style.backgroundSize = "cover";
+}
+
+let keyBuffer = [];
+let dMode = 0;
+
+function konami(e) {
+
+    //console.log(e);
+    //The konami code
+    var kode = [38,38,40,40,37,39,37,39,66,65,13];
+
+    //every key pressed will go into the buffer
+    keyBuffer.push(e.keyCode);
+
+    //we check the buffer each press to see if it matches
+    //the code so far, if not clear it
+    keyBuffer.forEach((key, index) => {
+        if (kode[index] !== key) {
+            keyBuffer = [];
+        }
+    })
+
+    //if the keybuffer is the same length, we must have gotten the code right
+    if (keyBuffer.length === kode.length && !dMode) {
+        console.log("YEET");
+        //fires off dark mode
+        darkMode();
+        dMode = true;
+        keyBuffer = [];
+    } else if (keyBuffer.length === kode.length && dMode) {
+        console.log("AWWW YEEEEAAAHHH");
+        //fires off light mode
+        lightMode();
+        dMode = false;
+        keyBuffer = [];
+    } else if (keyBuffer.length > kode.length) {
+        keyBuffer = [];
+    }
+
+}
+
+document.addEventListener("keydown", konami);

@@ -11,7 +11,7 @@
 <body>
 
 <!--Top Navbar-->
-
+<div id="background">
 <div class="navbar mb-2 p2 text-white" id="navbar"><span id="nav-title">NuStart Weather</span><span id="city"></span></div>
 
 <!--City search form-->
@@ -20,12 +20,16 @@
 <div id="input-form">
     <form>
         <div class="form-group form-inline ml-3">
-            <label for="cityName" id="search">Place</label>
+            <label for="cityName" id="search">Search Weather</label>
             <input type="text" class="form-control ml-3" id="cityName" placeholder="Enter city">
             <button class="btn btn-primary ml-3" type="submit" id="citySearch">Search</button>
         </div>
     </form>
 </div>
+
+    <div class="row justify-content-center">
+        <div class="col-6" id="map" style="width: 100%; height: 600px;"></div>
+    </div>
 
 <!--Placeholder card -->
 <div class="d-flex flex-wrap justify-content-center" id="weatherCards">
@@ -55,8 +59,9 @@
         </div>
     </div>
 </div>
+</div>
 
-<div id="map" style="width: 100%; height: 300px;"></div>
+
 
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
 <script src="js/keys.js"></script>
